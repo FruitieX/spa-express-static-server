@@ -6,6 +6,7 @@ var helmet = require('helmet');
 var enforceSsl = require('../middleware/enforce-ssl');
 var logger = require('../middleware/request-logger');
 var spaCatchRoutes = require('../middleware/spa-catch-routes');
+var addHeaders = require('../middleware/add-headers');
 var errorHandler = require('../middleware/error-handler');
 var compression = require('compression');
 var serveStatic = require('serve-static');
@@ -24,6 +25,11 @@ module.exports = function createApp(options) {
 
     // Logging requests
     app.use(logger());
+
+    // Custom headers middleware
+    if (Object.keys(options.responseHeaders).length) {
+        app.use(addHeaders(options.responseHeaders));
+    }
 
     // Security middleware
     app.use(helmet.hidePoweredBy());

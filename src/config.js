@@ -61,6 +61,9 @@ module.exports = {
     // Limits maximum incoming headers count. If set to 0 - no limit will be applied.
     maxHeadersCount: 1000,
 
+    // Key value pairs of custom headers, none by default
+    responseHeaders: {},
+
     // The number of milliseconds of inactivity before a socket is presumed to have timed out.
     serverTimeout: 2 * 60 * 1000 // 2 minutes
 };
